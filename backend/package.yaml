@@ -19,8 +19,26 @@ extra-source-files:
 # common to point users to the README.md file.
 description:         Please see the README on GitHub at <https://github.com/githubuser/backend#readme>
 
+default-extensions:
+- TemplateHaskell
+- DataKinds
+- FlexibleInstances
+- MultiParamTypeClasses
+- DeriveGeneric
+- OverloadedStrings
+
 dependencies:
 - base >= 4.7 && < 5
+- relational-record
+- relational-query
+- relational-query-HDBC
+- HDBC-postgresql
+- template-haskell
+- wai
+- warp
+- http-types
+- time
+- bytestring
 
 library:
   source-dirs: src

@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app:
+    image: mybackend:latest
+    environment:
+      DB_HOST: db
+      POSTGRES_USER: myuser
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: mypassword
+    # REVIEW: wait for db ready
+    command: bash -c 'sleep 3 && /sbin/backend-exe'
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11.5
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/0_schema.sql
+      - ./seed.sql:/docker-entrypoint-initdb.d/1_seed.sql
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: mypassword
+    expose:
+      - 5432
